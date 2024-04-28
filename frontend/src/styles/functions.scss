@@ -1,7 +1,7 @@
 @import "./variables.module.scss";
 
 @function rem($pxValue) {
-   $remValue: ($pxValue / stripUnit($defaultFontSize)) + rem;
+   $remValue: calc($pxValue / stripUnit($defaultFontSize)) + rem;
    @return $remValue;
 }
 
@@ -28,6 +28,13 @@
    @return map-get($themeColors, $key);
 }
 
+@function boxShadow($key) {
+   @if not map-has-key($shadows, $key) {
+      @warn "Shadow `#{$key}` not found.";
+   }
+   @return map-get($shadows, $key);
+}
+
 @function pageWrapperWidth($key) {
    @if not map-has-key($pageWrappersWidths, $key) {
       @warn "Page wrapper `#{$key}` not found.";
@@ -36,7 +43,7 @@
 }
 
 @function bp($key) {
-   @if not map-has-key($themeColors, $key) {
+   @if not map-has-key($breakpoints, $key) {
       @warn "Breakpoint `#{$key}` not found.";
    }
    @return map-get($breakpoints, $key);

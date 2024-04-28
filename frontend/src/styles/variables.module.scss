@@ -1,42 +1,39 @@
 $defaultFontSize: 16px;
 
-$desktopSafePadding: 48px;
-$mobileSafePadding: 24px;
-
 $fontSizes: (
-   normal: 1rem,
-   medium: 1.125rem,
-);
-
-$pageWrappersWidths: (
-   extraSmall: 432px,
-   small: 647px,
-   medium: 943px,
-   large: 1226px,
-   extraLarge: 1512px,
-);
-
-$breakpoints: (
-   extraSmall: 582px,
-   small: 837px,
-   medium: 1092px,
-   large: 1347px,
+        sm: 0.9375rem,
+        DEFAULT: 1rem,
+        lg: 1.125rem,
+        xl: 1.25rem,
+        2xl: 1.5rem
 );
 
 $themeColors: (
-   pageBackground: #F7F7F7,
+        pageBackground: #F7F7F7,
 
-   // Common colors
-   green: #378b60,
-   yellow: #fb9600,
-   pink: #ff00b8
+        border: #E4E4E4,
+
+        gray: #4A4A4A,
+        gray-light: #777777,
+
+        blue: #1764CC,
+);
+
+$shadows: (
+        card: 0px 1px 8px 0px #00000040
+);
+
+$breakpoints: (
+        extraSmall: 582px,
+        small: 837px,
+        medium: 1092px,
+        large: 1347px,
 );
 
 :export {
-   // Colors
-   inputFontColorPrimary: map-get($themeColors, inputFontColorPrimary);
-   greenColor: map-get($themeColors, green);
-   pinkColor: map-get($themeColors, pink);
-   yellowColor: map-get($themeColors, yellow);
-   cardBackgroundColorPrimary: map-get($themeColors, cardBackgroundColorPrimary);
+  inputFontColorPrimary: map-get($themeColors, inputFontColorPrimary);
+  greenColor: map-get($themeColors, green);
+  pinkColor: map-get($themeColors, pink);
+  yellowColor: map-get($themeColors, yellow);
+  cardBackgroundColorPrimary: map-get($themeColors, cardBackgroundColorPrimary);
 }

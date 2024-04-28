@@ -1,0 +1,74 @@
+@import 'styles';
+
+.card {
+  box-shadow: boxShadow(card);
+  border-radius: 4px;
+  color: themeColor(gray);
+  background: white;
+
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+
+    padding: rem(12) rem(20);
+    border-bottom: 1px themeColor(border) solid;
+
+    .headerLeft {
+      font-size: fontSize(sm);
+
+      .id {
+        cursor: pointer;
+        color: themeColor(blue)
+      }
+
+      .minus {
+        margin: 0 rem(6)
+      }
+    }
+
+    .headerRight {
+      .user {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: themeColor(blue)
+      }
+    }
+
+  }
+
+  .cardBody {
+    padding: rem(24) rem(20);
+
+    .title {
+      font-size: fontSize(2xl);
+      margin-bottom: rem(16);
+    }
+
+    .content {
+      display: flex;
+
+      .contentLeft {
+
+        .text {
+          line-height: 22px;
+          font-size: fontSize(sm);
+          max-width: 776px;
+        }
+      }
+
+      .divide {
+        width: 1px;
+        background-color: themeColor(border);
+        margin: 0 rem(16);
+      }
+
+      .contentRight {
+        .image {
+          max-width: rem(165);
+        }
+      }
+    }
+  }
+}
