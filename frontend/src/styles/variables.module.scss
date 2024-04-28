@@ -1,0 +1,42 @@
+$defaultFontSize: 16px;
+
+$desktopSafePadding: 48px;
+$mobileSafePadding: 24px;
+
+$fontSizes: (
+   normal: 1rem,
+   medium: 1.125rem,
+);
+
+$pageWrappersWidths: (
+   extraSmall: 432px,
+   small: 647px,
+   medium: 943px,
+   large: 1226px,
+   extraLarge: 1512px,
+);
+
+$breakpoints: (
+   extraSmall: 582px,
+   small: 837px,
+   medium: 1092px,
+   large: 1347px,
+);
+
+$themeColors: (
+   pageBackground: #F7F7F7,
+
+   // Common colors
+   green: #378b60,
+   yellow: #fb9600,
+   pink: #ff00b8
+);
+
+:export {
+   // Colors
+   inputFontColorPrimary: map-get($themeColors, inputFontColorPrimary);
+   greenColor: map-get($themeColors, green);
+   pinkColor: map-get($themeColors, pink);
+   yellowColor: map-get($themeColors, yellow);
+   cardBackgroundColorPrimary: map-get($themeColors, cardBackgroundColorPrimary);
+}
