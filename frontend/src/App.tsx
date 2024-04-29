@@ -1,23 +1,41 @@
 import PageWrapper from './components/wrappers/PageWrapper/PageWrapper'
 import BulletinCardList from './components/containers/BulletinCardList/BulletinCardList'
-import { Suspense, useEffect, useState } from 'react'
-import Bulletin from './types/models/Bulletin'
-import { getModerationFeed } from './api/moderationFeed/moderationFeed'
+import ModerationButtonList from './components/containers/ModerationButtonList/ModerationButtonList'
+import useModerationFeed from './hooks/useModerationFeed'
+import usePageMeta from './hooks/usePageMeta'
+import useDecisionStack from './hooks/useDecisionStack'
 
 function App() {
-    const [bulletins, setBulletins] = useState<Bulletin[]>([])
+    const [bulletins, getStatus] = useModerationFeed()
+    const [decisionStack, activeIndex, setActiveIndex] = useDecisionStack({ bulletins })
 
-    useEffect(() => {
-        getModerationFeed().then(({ data }) => {
-            setBulletins(data)
-        })
-    }, [])
+    usePageMeta({
+        title: 'Лента модерации',
+    })
 
+    const onBulletinCardClick = (bulletinIndex: number) => {
+        setActiveIndex(bulletinIndex)
+    }
+
+    const onCommentSubmit = (value: string) => {}
+
+    if (getStatus('idle')) {
+        return (
+            <PageWrapper>
+                <span>Нажмите Enter, чтобы загрузить объявления</span>
+            </PageWrapper>
+        )
+    }
     return (
         <PageWrapper>
-            <Suspense>
-                <BulletinCardList bulletinList={bulletins} />
-            </Suspense>
+            <BulletinCardList
+                activeIndex={activeIndex}
+                decisionStack={decisionStack}
+                bulletinList={bulletins}
+                onClick={onBulletinCardClick}
+                onCommentSubmit={onCommentSubmit}
+            />
+            <ModerationButtonList />
         </PageWrapper>
     )
 }

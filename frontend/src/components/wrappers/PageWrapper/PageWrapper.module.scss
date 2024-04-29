@@ -1,7 +1,16 @@
 @import "styles";
 
 .wrapper {
-  padding: 20px;
+  padding: rem(20);
   background-color: themeColor(pageBackground);
   min-height: 100vh;
+
+  .container {
+    max-width: 1380px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-column-gap: rem(20);
+  }
 }

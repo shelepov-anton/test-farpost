@@ -5,6 +5,7 @@
   border-radius: 4px;
   color: themeColor(gray);
   background: white;
+  border: 1px solid transparent;
 
   .cardHeader {
     display: flex;
@@ -54,7 +55,6 @@
         .text {
           line-height: 22px;
           font-size: fontSize(sm);
-          max-width: 776px;
         }
       }
 
@@ -65,10 +65,31 @@
       }
 
       .contentRight {
+        max-width: 312px;
+        width: 100%;
+
         .image {
           max-width: rem(165);
+          margin-bottom: rem(16);
         }
       }
     }
   }
 }
+
+.active {
+  border-color: yellow;
+}
+
+.approve {
+  border-color: #88BD35;
+}
+
+.decline {
+  border-color: #F7882E;
+}
+
+.escalation {
+  border-color: #1764CC;
+}
+

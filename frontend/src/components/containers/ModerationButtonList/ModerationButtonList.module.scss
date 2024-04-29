@@ -1,0 +1,9 @@
+@import "styles";
+
+.container {
+  position: sticky;
+  top: rem(20);
+  display: grid;
+  grid-row-gap: rem(8);
+  grid-template-columns: repeat(2, auto);
+}

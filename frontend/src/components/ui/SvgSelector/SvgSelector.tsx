@@ -1,14 +1,12 @@
 import { IconName } from './IconName'
+import { FC } from 'react'
 
 interface ISvgSelectorProps {
     icon: IconName
     color?: string
 }
 
-export const SvgSelector: React.FC<ISvgSelectorProps> = ({
-    icon,
-    color = '',
-}) => {
+export const SvgSelector: FC<ISvgSelectorProps> = ({ icon, color = '' }) => {
     switch (icon) {
         case IconName.USER:
             return (
