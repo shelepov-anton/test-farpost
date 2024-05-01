@@ -9,7 +9,7 @@ interface Props {
     activeIndex: number
     decisionStack: DecisionStackItem[]
     onClick: (bulletinIndex: number) => void
-    onCommentSubmit: (value: string) => void
+    onCommentSubmit: (value: string, bulletinId: number) => void
 }
 
 function BulletinCardList({ bulletinList, activeIndex, decisionStack, onClick, onCommentSubmit }: Props) {
@@ -17,8 +17,8 @@ function BulletinCardList({ bulletinList, activeIndex, decisionStack, onClick, o
         return decisionStack.find((item) => item.bulletinId === id)
     }
 
-    const submitComment = (value: string) => {
-        onCommentSubmit(value)
+    const submitComment = (value: string, bulletinId: number) => {
+        onCommentSubmit(value, bulletinId)
     }
 
     return (

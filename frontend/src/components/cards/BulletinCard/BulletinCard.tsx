@@ -14,12 +14,12 @@ interface Props {
     isActive?: boolean
     decision?: DecisionStackItem
     onClick: () => void
-    onCommentSubmit: (value: string) => void
+    onCommentSubmit: (value: string, bulletinId: number) => void
 }
 
 function BulletinCard({ bulletin, isActive, decision, onClick, onCommentSubmit }: Props) {
     const submitComment = (value: string) => {
-        onCommentSubmit(value)
+        onCommentSubmit(value, bulletin.id)
     }
 
     const displayCommentForm = decision && decision?.decision !== 'approve'

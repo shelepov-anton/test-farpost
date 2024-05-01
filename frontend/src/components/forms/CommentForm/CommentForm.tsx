@@ -26,12 +26,12 @@ function CommentForm({ comment, type, submit }: Props) {
         setIsSubmitted(true)
     }
 
-    const title = type === 'decline' ? 'Причина отклонения' : 'Примечание для модератора'
+    const title = type === 'decline' ? 'Причина отклонения *' : 'Примечание для модератора'
 
     return (
         <form className={style.container}>
             <h2 className={style.title}>{title}</h2>
-            <TextArea value={value} onChange={onChange} />
+            <TextArea value={value} onChange={onChange} focusOnMount />
             {!isSubmitted && (
                 <div className={style.buttons}>
                     <Button text="Отмена" type="secondary" onClick={onSubmit} />

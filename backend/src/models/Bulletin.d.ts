@@ -5,5 +5,5 @@ export default interface Bulletin {
     ownerLogin: string
     bulletinSubject: string
     bulletinText: string
-    bulletinImages: string[]
+    bulletinImages: string
 }

@@ -1,4 +1,4 @@
-@import "./variables.module.scss";
+@import "./index.scss";
 
 body {
    overflow-y: scroll;
@@ -40,4 +40,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+}
+
+.baseText {
+   color: themeColor(gray-1000)
 }

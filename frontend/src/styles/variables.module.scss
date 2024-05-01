@@ -37,13 +37,6 @@ $shadows: (
         active: 0 0 4px rgba(103, 191, 255, .5)
 );
 
-$breakpoints: (
-        extraSmall: 582px,
-        small: 837px,
-        medium: 1092px,
-        large: 1347px,
-);
-
 :export {
   decisionApprove: map-get($themeColors, decisionApprove);
   decisionDecline: map-get($themeColors, decisionDecline);
