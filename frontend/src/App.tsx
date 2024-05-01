@@ -2,16 +2,11 @@ import PageWrapper from './components/wrappers/PageWrapper/PageWrapper'
 import BulletinCardList from './components/containers/BulletinCardList/BulletinCardList'
 import ModerationButtonList from './components/containers/ModerationButtonList/ModerationButtonList'
 import useModerationFeed from './hooks/useModerationFeed'
-import usePageMeta from './hooks/usePageMeta'
 import useDecisionStack from './hooks/useDecisionStack'
 
 function App() {
     const [bulletins, getStatus] = useModerationFeed()
     const [decisionStack, activeIndex, setActiveIndex] = useDecisionStack({ bulletins })
-
-    usePageMeta({
-        title: 'Лента модерации',
-    })
 
     const onBulletinCardClick = (bulletinIndex: number) => {
         setActiveIndex(bulletinIndex)

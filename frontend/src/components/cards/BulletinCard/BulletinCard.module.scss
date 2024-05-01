@@ -3,9 +3,16 @@
 .card {
   box-shadow: boxShadow(card);
   border-radius: 4px;
-  color: themeColor(gray);
+  color: themeColor(gray-1000);
   background: white;
-  border: 1px solid transparent;
+  border: 1px solid themeColor(borderLight);
+  position: relative;
+
+  transition: background-color .1s;
+
+  &:hover {
+    background-color: themeColor(cardHover);
+  }
 
   .cardHeader {
     display: flex;
@@ -51,10 +58,15 @@
       display: flex;
 
       .contentLeft {
+        flex: 1;
 
         .text {
           line-height: 22px;
           font-size: fontSize(sm);
+        }
+
+        .comment {
+          margin-top: rem(16);;
         }
       }
 
@@ -75,21 +87,14 @@
       }
     }
   }
+
+  .marker {
+    position: absolute;
+    bottom: 20px;
+    right: 24px;
+  }
 }
 
 .active {
-  border-color: yellow;
+  background-color: themeColor(cardActive)
 }
-
-.approve {
-  border-color: #88BD35;
-}
-
-.decline {
-  border-color: #F7882E;
-}
-
-.escalation {
-  border-color: #1764CC;
-}
-

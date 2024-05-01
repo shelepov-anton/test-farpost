@@ -5,4 +5,13 @@
   min-height: 100px;
   border-radius: 4px;
   border-color: themeColor(border);
+  padding: rem(4);
+  font-size: fontSize(xs);
+
+  resize: none;
+
+  &:focus {
+    border-color: themeColor(borderActive);
+    box-shadow: boxShadow(active);
+  }
 }

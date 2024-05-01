@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import moderationFeedController from '@/controllers/moderationFeedController'
+import moderationFeedController from '@/controllers/moderationFeed.controller'
 
 // Initialization
 const router = Router()

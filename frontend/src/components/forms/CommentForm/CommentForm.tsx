@@ -2,9 +2,10 @@ import Button from '../../buttons/Button/Button'
 import TextArea from '../../ui/TextArea/TextArea'
 import style from './CommentForm.module.scss'
 import { useState } from 'react'
+import { ModerationDecision } from '../../../types/Moderaion'
 
 interface Props {
-    type: 'decline' | 'escalation'
+    type: ModerationDecision
     comment: string
     submit: (value: string) => void
 }
@@ -25,14 +26,16 @@ function CommentForm({ comment, type, submit }: Props) {
         setIsSubmitted(true)
     }
 
+    const title = type === 'decline' ? 'Причина отклонения' : 'Примечание для модератора'
+
     return (
         <form className={style.container}>
-            <h2>{type === 'decline' ? 'Причина отклонения:' : 'Примечание:'}</h2>
-            <TextArea value={comment} onChange={onChange} />
+            <h2 className={style.title}>{title}</h2>
+            <TextArea value={value} onChange={onChange} />
             {!isSubmitted && (
-                <div>
-                    <Button text="Отмена" onClick={onSubmit} />
-                    <Button text="Подтвердить" onClick={onSubmit} />
+                <div className={style.buttons}>
+                    <Button text="Отмена" type="secondary" onClick={onSubmit} />
+                    <Button text="Подтвердить" type="primary" onClick={onSubmit} />
                 </div>
             )}
         </form>

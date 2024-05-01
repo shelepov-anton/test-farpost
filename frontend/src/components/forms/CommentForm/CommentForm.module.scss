@@ -1,4 +1,18 @@
+@import "styles";
+
 .container {
   display: flex;
   flex-direction: column;
+
+  .title {
+    font-size: fontSize(sm);
+    margin-bottom: rem(8);
+  }
+
+  .buttons {
+    margin-top: rem(10);
+    display: flex;
+    gap: rem(10);
+    margin-left: auto;
+  }
 }

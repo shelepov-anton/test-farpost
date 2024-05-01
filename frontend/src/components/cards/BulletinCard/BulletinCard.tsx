@@ -4,9 +4,10 @@ import replaceWithBr from '../../../utils/scripts/replaceWithBr'
 import { SvgSelector } from '../../ui/SvgSelector/SvgSelector'
 import { IconName } from '../../ui/SvgSelector/IconName'
 import { useEffect, useRef } from 'react'
-import { ModerationDecision } from '../../../types/Moderaion'
 import { DecisionStackItem } from '../../../hooks/useDecisionStack'
 import CommentForm from '../../forms/CommentForm/CommentForm'
+import Marker from '../../ui/Marker/Marker'
+import { moderationDecisionMarker } from '../../../utils/data/moderation'
 
 interface Props {
     bulletin: Bulletin
@@ -17,20 +18,15 @@ interface Props {
 }
 
 function BulletinCard({ bulletin, isActive, decision, onClick, onCommentSubmit }: Props) {
-    const cardRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        isActive && cardRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' })
-    }, [isActive])
-
     const submitComment = (value: string) => {
         onCommentSubmit(value)
     }
 
-    const borderClass = isActive ? style.active : decision && style[decision.decision]
+    const displayCommentForm = decision && decision?.decision !== 'approve'
+    const marker = decision ? moderationDecisionMarker[decision.decision] : null
 
     return (
-        <article ref={cardRef} onClick={onClick} className={`${style.card} ${borderClass}`}>
+        <article onClick={onClick} className={`${style.card} ${isActive && style.active}`}>
             <div className={style.cardHeader}>
                 <div className={style.headerLeft}>
                     <span className={style.id}>{bulletin.id}</span>
@@ -54,6 +50,15 @@ function BulletinCard({ bulletin, isActive, decision, onClick, onCommentSubmit }
                                 __html: replaceWithBr(bulletin.bulletinText),
                             }}
                         />
+                        {displayCommentForm && (
+                            <div className={style.comment}>
+                                <CommentForm
+                                    submit={submitComment}
+                                    comment={decision.comment || ''}
+                                    type={decision.decision}
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className={style.divide} />
                     <div className={style.contentRight}>
@@ -62,9 +67,7 @@ function BulletinCard({ bulletin, isActive, decision, onClick, onCommentSubmit }
                         ))}
                     </div>
                 </div>
-                {decision && decision?.decision !== 'approve' && (
-                    <CommentForm submit={submitComment} comment={decision.comment || ''} type={decision.decision} />
-                )}
+                <span className={style.marker}>{marker && <Marker label={marker.title} color={marker.color} />}</span>
             </div>
         </article>
     )

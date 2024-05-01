@@ -1,6 +1,6 @@
 import cors from 'cors'
 import express, { Application } from 'express'
-import moderationFeedRoute from '@/routes/moderationFeedRoute'
+import moderationFeedRoute from '@/routes/moderationFeed.route'
 
 // Server Initialization
 const app: Application = express()
