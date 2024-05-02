@@ -33,7 +33,7 @@ function useDecisionStack({bulletins, fetchBulletins}: Props): Result {
     }
 
     const updateDecisionStack = (decision: ModerationDecision): void => {
-        if (!bulletins.length && activeIndex > bulletins.length) return
+        if (!bulletins.length && activeIndex >= bulletins.length) return
 
         const updatedStack = [...decisionStack]
         updatedStack.splice(activeIndex, 1, {bulletinId: bulletins[activeIndex].id, decision})
@@ -93,7 +93,7 @@ function useDecisionStack({bulletins, fetchBulletins}: Props): Result {
     useEffect(() => {
         document.addEventListener('keydown', handleKeydown)
         return () => document.removeEventListener('keydown', handleKeydown)
-    }, [bulletins, activeIndex, isWaitForComment])
+    }, [bulletins, activeIndex, decisionStack])
 
     return {
         decisionStack,

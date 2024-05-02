@@ -5,12 +5,5 @@
   background: none;
   border: none;
   font-size: fontSize(sm);
-  cursor: pointer;
   padding: 0;
-
-  transition: color .2s;
-
-  &:hover {
-    color: themeColor(gray-900)
-  }
 }
