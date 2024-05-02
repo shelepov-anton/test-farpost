@@ -8,7 +8,7 @@ function formatDateString(timestamp: number): string {
         (currentDate.getTime() - timestampDate.getTime()) / (1000 * 3600 * 24)
     )
 
-    const time = timestampDate.toLocaleTimeString(navigator.language, {
+    const time = timestampDate.toLocaleTimeString('ru', {
         hour: '2-digit',
         minute: '2-digit',
     })

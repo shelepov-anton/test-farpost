@@ -3,10 +3,14 @@ import BulletinCardList from './components/containers/BulletinCardList/BulletinC
 import ModerationButtonList from './components/containers/ModerationButtonList/ModerationButtonList'
 import useModerationFeed from './hooks/useModerationFeed'
 import useDecisionStack from './hooks/useDecisionStack'
+import {useEffect} from "react";
 
 function App() {
-    const [bulletins, getStatus] = useModerationFeed()
-    const { decisionStack, setDecisionComment, activeIndex, updateActiveIndex } = useDecisionStack({ bulletins })
+    const {bulletins, fetchBulletins, getStatus} = useModerationFeed()
+    const {decisionStack, setDecisionComment, activeIndex, updateActiveIndex} = useDecisionStack({
+        bulletins,
+        fetchBulletins
+    })
 
     const onBulletinCardClick = (bulletinIndex: number) => {
         updateActiveIndex(bulletinIndex)
@@ -15,6 +19,10 @@ function App() {
     const onCommentSubmit = (value: string, bulletinId: number) => {
         setDecisionComment(value, bulletinId)
     }
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, [bulletins]);
 
     if (getStatus('idle') || !bulletins.length) {
         const message = getStatus('idle')
@@ -35,7 +43,7 @@ function App() {
                 onClick={onBulletinCardClick}
                 onCommentSubmit={onCommentSubmit}
             />
-            <ModerationButtonList />
+            <ModerationButtonList/>
         </PageWrapper>
     )
 }

@@ -12,7 +12,9 @@ function TextArea({ value, onChange, focusOnMount }: Props) {
 
     useEffect(() => {
         if (focusOnMount && ref.current) {
-            ref.current.focus()
+            setTimeout(() => {
+                ref.current?.focus()
+            }, 100)
         }
     }, [])
 

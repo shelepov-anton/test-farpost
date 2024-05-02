@@ -26,6 +26,11 @@ function CommentForm({ comment, type, submit }: Props) {
         setIsSubmitted(true)
     }
 
+    const onCancel = () => {
+        setValue(comment)
+        setIsSubmitted(true)
+    }
+
     const title = type === 'decline' ? 'Причина отклонения *' : 'Примечание для модератора'
 
     return (
@@ -34,7 +39,7 @@ function CommentForm({ comment, type, submit }: Props) {
             <TextArea value={value} onChange={onChange} focusOnMount />
             {!isSubmitted && (
                 <div className={style.buttons}>
-                    <Button text="Отмена" type="secondary" onClick={onSubmit} />
+                    <Button text="Отмена" type="secondary" onClick={onCancel} />
                     <Button text="Подтвердить" type="primary" onClick={onSubmit} />
                 </div>
             )}

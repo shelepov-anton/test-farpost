@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import Bulletin from '../types/models/Bulletin'
-import { ModerationDecision } from '../types/Moderaion'
-import { postModerationDecisions } from '../api/moderationFeed/moderationFeed'
+import {ModerationDecision} from '../types/Moderaion'
+import {postModerationDecisions} from '../api/moderationFeed/moderationFeed'
 
 export interface DecisionStackItem {
     bulletinId: number
@@ -10,7 +10,8 @@ export interface DecisionStackItem {
 }
 
 interface Props {
-    bulletins: Bulletin[]
+    bulletins: Bulletin[],
+    fetchBulletins: () => void
 }
 
 interface Result {
@@ -20,14 +21,13 @@ interface Result {
     updateActiveIndex: (index: number) => void
 }
 
-function useDecisionStack({ bulletins }: Props): Result {
+function useDecisionStack({bulletins, fetchBulletins}: Props): Result {
     const [decisionStack, setDecisionStack] = useState<DecisionStackItem[]>([])
     const [activeIndex, setActiveIndex] = useState(0)
-
-    let isWaitForComment = false
+    const [isWaitForComment, setIsWaitForComment] = useState(false)
 
     const updateActiveIndex = (index: number): void => {
-        if (!isWaitForComment) {
+        if (index < bulletins.length) {
             setActiveIndex(index)
         }
     }
@@ -36,24 +36,29 @@ function useDecisionStack({ bulletins }: Props): Result {
         if (!bulletins.length && activeIndex > bulletins.length) return
 
         const updatedStack = [...decisionStack]
-        updatedStack.splice(activeIndex, 1, { bulletinId: bulletins[activeIndex].id, decision })
+        updatedStack.splice(activeIndex, 1, {bulletinId: bulletins[activeIndex].id, decision})
 
         setDecisionStack(updatedStack)
 
-        if (decision !== 'approve') {
-            isWaitForComment = true
+        if (decision === 'decline') {
+            setIsWaitForComment(true)
         } else {
             updateActiveIndex(activeIndex + 1)
         }
     }
+    useEffect(() => {
+        if (!isWaitForComment) {
+            updateActiveIndex(activeIndex + 1)
+        }
+    }, [isWaitForComment]);
 
     const setDecisionComment = (comment: string, bulletinId: number): void => {
         const index = decisionStack.findIndex((item) => item.bulletinId === bulletinId)
         const updatedStack = [...decisionStack]
-        updatedStack.splice(index, 1, { ...decisionStack[index], comment })
+        updatedStack.splice(index, 1, {...decisionStack[index], comment})
         setDecisionStack(updatedStack)
-        isWaitForComment = false
-        updateActiveIndex(activeIndex + 1)
+        setIsWaitForComment(false)
+        setActiveIndex(activeIndex + 1)
     }
 
     const sendDecisions = async () => {
@@ -65,7 +70,8 @@ function useDecisionStack({ bulletins }: Props): Result {
     }
 
     const handleKeydown = async (e: KeyboardEvent): Promise<void> => {
-        if (isWaitForComment) return
+        const bulletinsLength = bulletins.length
+        if (!bulletinsLength || activeIndex === bulletinsLength || document.activeElement !== document.body) return
 
         if (e.code === 'Space') {
             e.preventDefault()
@@ -80,6 +86,7 @@ function useDecisionStack({ bulletins }: Props): Result {
         if (e.code === 'F7') {
             e.preventDefault()
             await sendDecisions()
+            fetchBulletins()
         }
     }
 

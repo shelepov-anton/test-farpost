@@ -63,7 +63,7 @@ function BulletinCard({ bulletin, isActive, decision, onClick, onCommentSubmit }
                     <div className={style.divide} />
                     <div className={style.contentRight}>
                         {bulletin.bulletinImages?.map((image) => (
-                            <img src={image} alt="Объявление" className={style.image} />
+                            <img src={image} alt="Объявление" key={image} className={style.image} />
                         ))}
                     </div>
                 </div>
